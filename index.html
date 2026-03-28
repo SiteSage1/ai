@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AI Chat Website</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      background: #0f172a;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .chat-container {
+      width: 350px;
+      background: #1e293b;
+      border-radius: 15px;
+      box-shadow: 0 0 15px black;
+      padding: 15px;
+    }
+
+    .chat-box {
+      height: 300px;
+      overflow-y: auto;
+      border-bottom: 1px solid gray;
+      margin-bottom: 10px;
+      padding: 10px;
+    }
+
+    .user {
+      text-align: right;
+      color: #38bdf8;
+    }
+
+    .bot {
+      text-align: left;
+      color: #22c55e;
+    }
+
+    input {
+      width: 70%;
+      padding: 8px;
+      border-radius: 10px;
+      border: none;
+    }
+
+    button {
+      padding: 8px;
+      border-radius: 10px;
+      border: none;
+      background: #38bdf8;
+      color: black;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="chat-container">
+  <h3>AI Chat 🤖</h3>
+
+  <div id="chatBox" class="chat-box"></div>
+
+  <input type="text" id="userInput" placeholder="Type a message...">
+  <button onclick="sendMessage()">Send</button>
+</div>
+
+<script>
+function sendMessage() {
+  let input = document.getElementById("userInput").value.trim();
+  if (input === "") return;
+
+  let chatBox = document.getElementById("chatBox");
+
+  chatBox.innerHTML += `<p class="user">You: ${input}</p>`;
+
+  let reply = getBotReply(input);
+
+  setTimeout(() => {
+    chatBox.innerHTML += `<p class="bot">Bot: ${reply}</p>`;
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }, 500);
+
+  document.getElementById("userInput").value = "";
+}
+
+function getBotReply(input) {
+  input = input.toLowerCase();
+
+  if (input.includes("hi") || input.includes("hello")) {
+    return "Hello! 😊";
+  } 
+  else if (input.includes("how are you")) {
+    return "I'm doing great! Thanks for asking!";
+  } 
+  else if (input.includes("name")) {
+    return "I'm your AI Chat Bot 🤖";
+  } 
+  else if (input.includes("bye")) {
+    return "Goodbye! Have a nice day!";
+  } 
+  else {
+    return "Sorry, I don't understand 😅";
+  }
+}
+</script>
+
+</body>
+</html>
